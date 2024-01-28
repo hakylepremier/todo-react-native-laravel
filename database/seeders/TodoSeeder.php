@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Todo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,10 +13,10 @@ class TodoSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = \App\Models\User::where(['email' => 'haky@haky.com']);
+        $user = \App\Models\User::where(['email' => 'haky@haky.com'])->first();
 
-        $posts = \App\Models\Todo::factory()
-            ->count(5)
+        Todo::factory()
+            ->count(10)
             ->for($user)
             ->create();
     }

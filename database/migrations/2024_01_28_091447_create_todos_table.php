@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->ulid();
+            $table->ulid('id');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('description');
             $table->boolean('completed')->default(false);
