@@ -22,7 +22,10 @@ class StoreTodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'description' => ['required', 'string', 'max:255'],
+            'completed' => ['boolean'],
+            'priority' => ['boolean'],
+            'due_date' => ['date', 'after_or_equal:today']
         ];
     }
 }

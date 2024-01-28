@@ -12,6 +12,11 @@ class TodoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $user = \App\Models\User::where(['email' => 'haky@haky.com']);
+
+        $posts = \App\Models\Todo::factory()
+            ->count(5)
+            ->for($user)
+            ->create();
     }
 }

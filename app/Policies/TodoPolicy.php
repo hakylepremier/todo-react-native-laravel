@@ -13,7 +13,7 @@ class TodoPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->is(auth()->user());
     }
 
     /**
@@ -21,7 +21,7 @@ class TodoPolicy
      */
     public function view(User $user, Todo $todo): bool
     {
-        //
+        return $user->is(auth()->user());
     }
 
     /**
@@ -29,7 +29,7 @@ class TodoPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->is(auth()->user());
     }
 
     /**
@@ -37,7 +37,7 @@ class TodoPolicy
      */
     public function update(User $user, Todo $todo): bool
     {
-        //
+        return $todo->user()->is($user);
     }
 
     /**
@@ -45,7 +45,7 @@ class TodoPolicy
      */
     public function delete(User $user, Todo $todo): bool
     {
-        //
+        return $this->update($user, $todo);
     }
 
     /**
@@ -53,7 +53,7 @@ class TodoPolicy
      */
     public function restore(User $user, Todo $todo): bool
     {
-        //
+        return $this->update($user, $todo);
     }
 
     /**
@@ -61,6 +61,6 @@ class TodoPolicy
      */
     public function forceDelete(User $user, Todo $todo): bool
     {
-        //
+        return $this->update($user, $todo);
     }
 }

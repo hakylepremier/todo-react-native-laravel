@@ -16,8 +16,12 @@ class TodoFactory extends Factory
      */
     public function definition(): array
     {
+        $due_date = fake()->randomElement([null, fake()->dateTimeBetween("+5 days", "+30 days")]);
         return [
-            //
+            'description' => fake()->realTextBetween(50, 100),
+            'completed' => false,
+            'priority' => fake()->boolean(),
+            'due_date' => $due_date,
         ];
     }
 }

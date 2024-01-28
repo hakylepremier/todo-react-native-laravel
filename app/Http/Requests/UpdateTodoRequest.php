@@ -22,7 +22,10 @@ class UpdateTodoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'description' => ['required', 'string', 'max:255'],
+            'completed' => ['required', 'boolean'],
+            'priority' => ['required', 'boolean'],
+            'due_date' => ['date', 'after_or_equal:today']
         ];
     }
 }

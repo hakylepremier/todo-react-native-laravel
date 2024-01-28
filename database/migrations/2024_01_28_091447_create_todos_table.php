@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
+            $table->ulid();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->string('description');
+            $table->boolean('completed')->default(false);
+            $table->boolean('priority')->default(false);
+            $table->dateTime('due_date')->nullable();
             $table->timestamps();
         });
     }
