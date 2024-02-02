@@ -185,7 +185,7 @@ export default function Authenticated({
                 </header>
             )}
 
-            <main>{children}</main>
+            <main className="bg-white">{children}</main>
         </div>
     );
 }
