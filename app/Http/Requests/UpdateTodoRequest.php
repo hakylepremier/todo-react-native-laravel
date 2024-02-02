@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTodoRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateTodoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,18 @@ class UpdateTodoRequest extends FormRequest
             'description' => ['required', 'string', 'max:255'],
             'completed' => ['required', 'boolean'],
             'priority' => ['required', 'boolean'],
-            'due_date' => ['date', 'after_or_equal:today']
+            'due_date' => ['date', 'after_or_equal:today', "nullable"]
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     */
+    // protected function prepareForValidation(): void
+    // {
+    //     dd($this->all());
+    //     // $this->merge([
+    //     //     'due_date' => $this->due_date ? Carbon::parse($this->due_date)->format('Y-m-d') : null,
+    //     // ]);
+    // }
 }

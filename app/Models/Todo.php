@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,16 @@ class Todo extends Model
         'completed' => false,
         'priority' => false,
     ];
+
+    protected $casts = [
+        'completed' => 'boolean',
+        'priority' => 'boolean',
+    ];
+
+    public function setDueDateFromAttribute($value)
+    {
+        $this->attributes['due_date'] =  Carbon::parse($value);
+    }
 
     // belongs to user
     public function user(): BelongsTo
