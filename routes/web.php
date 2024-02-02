@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ToggleCompletedController;
+use App\Http\Controllers\TogglePriorityController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -39,5 +41,11 @@ Route::middleware('auth')->group(function () {
 Route::resource('todos', TodoController::class)
     ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+Route::patch('/todos/{todo}/complete', ToggleCompletedController::class)
+    ->middleware(['auth', 'verified'])->name('todos.complete');
+
+Route::patch('/todos/{todo}/priority', TogglePriorityController::class)
+    ->middleware(['auth', 'verified'])->name('todos.priority');
 
 require __DIR__ . '/auth.php';
